@@ -20,6 +20,30 @@ public class BogoSorter extends Sorter {
      */
     @Override
     void sort(int[] array, SortingVisualizer display) {
-        
+    	
+        if (intArraySorted(array) == true) {
+        //good!! :)
+        } else {
+        	int i = array[new Random().nextInt(array.length - 1)];
+        	int e = array[new Random().nextInt(array.length - 1)];
+        	
+			int one = array[i];
+			array[i] = array[e];
+			array[e] = one;
+			display.updateDisplay();
+        }
     }
+    
+	public boolean intArraySorted(int[] arr) {
+		boolean ascending = true;
+		for (int i = 0; i < arr.length - 1; i++) {
+				if (arr[i] <= arr[i+1]) {
+					//good
+				}else {
+					ascending = false;
+					//bad :(
+			}
+		}
+		return ascending;
+	}
 }

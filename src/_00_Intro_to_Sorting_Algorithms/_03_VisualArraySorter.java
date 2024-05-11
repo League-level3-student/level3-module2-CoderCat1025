@@ -1,5 +1,8 @@
 package _00_Intro_to_Sorting_Algorithms;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import processing.core.PApplet;
 
 /*
@@ -38,43 +41,61 @@ import processing.core.PApplet;
  *     mousePressed variable
  */
 public class _03_VisualArraySorter extends PApplet {
-    static final int WIDTH = 600;
-    static final int HEIGHT = 400;
+	static final int WIDTH = 500;
+	static final int HEIGHT = 500;
+	int[] ints;
 
-    @Override
-    public void settings() {
-        
-    }
+	@Override
+	public void settings() {
+		size(500, 500);
+	}
 
-    @Override
-    public void setup() {
-        
-    }
+	@Override
+	public void setup() {
+		ints = new int[50];
+		for (int i = 0; i < ints.length; i++) {
+			ints[i] = (int)random(height);
+			noStroke();
+		}
+	}
 
-    @Override
-    public void draw() {
-        
-    }
+	@Override
+	public void draw() {
+		background(219, 165, 255);
+		fill(65, 205, 255);
 
-    static public void main(String[] passedArgs) {
-        PApplet.main(_03_VisualArraySorter.class.getName());
-    }
-    
-    /*********************** DO NOT MODIFY THE CODE BELOW ********************/
-    
-    int startIndex = 1;
+		for (int i = 0; i < ints.length; i++) {
+			rect(i*(width/ints.length), HEIGHT, width/ints.length, -ints[i]);
+		}
 
-    void stepSort(int[] arr) {
-      for (int i = startIndex; i < arr.length; i++) {
-        if (arr[i - 1] > arr[i]) {
-          int t = arr[i];
-          arr[i] = arr[i - 1];
-          arr[i - 1] = t;
+		stepSort(ints);
 
-          startIndex = i;
-          return;
-        }
-      }
-      startIndex = 1;
-    }
+		if (mousePressed) {
+			for (int i = 0; i < ints.length; i++) {
+				ints[i] = (int)random(height);
+			}
+		}
+	}
+
+	static public void main(String[] passedArgs) {
+		PApplet.main(_03_VisualArraySorter.class.getName());
+	}
+
+	/*********************** DO NOT MODIFY THE CODE BELOW ********************/
+
+	int startIndex = 1;
+
+	void stepSort(int[] arr) {
+		for (int i = startIndex; i < arr.length; i++) {
+			if (arr[i - 1] > arr[i]) {
+				int t = arr[i];
+				arr[i] = arr[i - 1];
+				arr[i - 1] = t;
+
+				startIndex = i;
+				return;
+			}
+		}
+		startIndex = 1;
+	}
 }
